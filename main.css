@@ -1,0 +1,38 @@
+body {
+    background-color: #efefef;
+    padding: 0;
+    margin: 0;
+}
+label {
+    font-size: 1.4em;
+    padding-left: 2%;
+}
+.input-text {
+    height: 35px;
+    text-align: center;
+    color: black;
+    font-size: 1.3em;
+    margin: 5px 15px 8px 15px;
+    border-radius: 7px;
+    box-shadow: 10px 10px 5px grey;
+    outline-color: #ec1313;
+}
+.contact__button {
+    height: 82px;
+    border-radius: 50%;
+    background-color: #ec1313;
+    color: #fff;
+    outline: none;
+    margin-left: 15px;
+}
+#button-phone {
+    color: #ec1313;
+    height: 35px;
+    width: 35px;
+    font-size: 1.5em;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 10px 10px 5px grey;
+}

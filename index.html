@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone Book</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<form id="search">
+    <input type="search" placeholder="Search" class="input-text">
+</form>
+<form id="contact" style="display: none;">
+    <label>First name:</label> <br>
+    <input type="text" name="fname" placeholder="First Name" class="input-text"><br>
+    <label>Last name:</label><br>
+    <input type="text" name="lname" placeholder="Last Name" class="input-text"><br>
+    <label>E-mail:</label><br>
+    <input type="email" name="email" placeholder="E-mail@" class="input-text"><br>
+    <label>Phone:</label><br>
+    <input type="tel" name="phone" placeholder="Phone" class="input-text">
+    <input type="button" name="add-tell" value="+" id="button-phone" onclick="addPhone()">
+    <br>
+    <input type="tel" name="phone" placeholder="Phone" id="phone" style="display: none;" class="input-text">
+    <br>
+</form>
+<button onclick="addContact()" class="contact__button">Add contact</button>
+<div id="contacts"></div>
+
+<script src="index.js"></script>
+</body>
+</html>
