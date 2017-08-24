@@ -24,6 +24,7 @@ label {
     color: #fff;
     outline: none;
     margin-left: 15px;
+    width: 80px;
 }
 #button-phone {
     color: #ec1313;
@@ -35,4 +36,11 @@ label {
     border: none;
     border-radius: 50%;
     box-shadow: 10px 10px 5px grey;
+}
+#contacts {
+    font-size: 23px;
+    padding-left: 30px;
+}
+#button-save {
+    display: none;
 }
