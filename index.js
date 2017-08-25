@@ -40,6 +40,7 @@ function showListContacts() {
     for (let i = 0; i < friends.length; i++) {
         let contact = document.createElement('div');
 
+        contact.setAttribute('id', friends[i].id);
         contact.innerHTML =
             '<div class="name" onclick="showInformationAboutContact(' + i + ')">' + friends[i].firstName +
             '&nbsp;' + friends[i].lastName + '</div>' +
@@ -78,6 +79,7 @@ function addContact(contact) {
          document.getElementById('lastname').value = contact.lastName;
          document.getElementById('email').value = contact.email;
          document.getElementById('number').value = contact.number;
+         document.getElementById('item_id').value = contact.id;
      }
 }
 
@@ -93,13 +95,13 @@ function toggleListOrForm() {
         search.style.display = 'none';
         save.style.display = 'inline-block';
         add.innerHTML = 'cansel';
+        clearFormInputs();
     } else {
         form.style.display = 'none';
         list.style.display = 'block';
         search.style.display = 'block';
         save.style.display = 'none';
         add.innerHTML = 'add contact';
-
     }
 }
 
@@ -113,22 +115,59 @@ function saveContact(){
     let userSurname = document.getElementById('lastname').value;
     let userEmail = document.getElementById('email').value;
     let userNumber = document.getElementById('number').value;
+    let userId = document.getElementById('item_id').value || Math.random();
+    userId += '';
+    console.log(userId);
     let user = {
         firstName: userName,
         lastName: userSurname,
         number: userNumber,
-        email: userEmail
+        email: userEmail,
+        id: userId
     };
 
-    addUserToLocalStorage(user);
+    if (!isUserDefined(user)) {
+        addUserToLocalStorage(user);
+    } else {
+        editAllOccuredUser(user);
+    }
+
     console.log(user);
     toggleListOrForm();
     showListContacts();
 }
 
+function clearFormInputs() {
+    document.getElementById('firstname').value = '';
+    document.getElementById('lastname').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('number').value = '';
+    document.getElementById('item_id').value = '';
+}
+
+function isUserDefined(user) {
+    let friends = JSON.parse(localStorage.getItem('friendsList')) || [];
+    let isExists = friends.some(function (item) {
+        return item.id === user.id;
+    });
+    return isExists;
+}
+
 function addUserToLocalStorage(friend) {
     let friends = JSON.parse(localStorage.getItem('friendsList')) || [];
     friends.push(friend);
+    localStorage.setItem('friendsList', JSON.stringify(friends));
+}
+
+function editAllOccuredUser(friend) {
+    let friends = JSON.parse(localStorage.getItem('friendsList')) || [];
+    friends.forEach(function (item) {
+        if(item.id === friend.id) {
+            item.lastName = friend.lastName;
+            item.number = friend.number;
+            item.email = friend.email;
+        }
+    });
     localStorage.setItem('friendsList', JSON.stringify(friends));
 }
 
