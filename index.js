@@ -25,9 +25,8 @@
 // let obtainedFriendsObj = JSON.parse(retrievedObjectStr);
 // console.log(obtainedFriendsObj);
 
-let friends = JSON.parse(localStorage.getItem('friendsList')) || [];
-
 function editContact(friendPosition) {
+    let friends = JSON.parse(localStorage.getItem('friendsList')) || [];
     console.log('>>>>CONTACT IS EDITED');
     addContact(friends[friendPosition]);
 }
@@ -36,22 +35,23 @@ function showListContacts() {
     let listContainer = document.getElementById('contacts');
     listContainer.innerHTML = '';
 
-
+    let friends = JSON.parse(localStorage.getItem('friendsList')) || [];
 
     for (let i = 0; i < friends.length; i++) {
         let contact = document.createElement('div');
 
         contact.innerHTML =
-            '<div class="name" onclick="showInformationAboutContact()">' + friends[i].firstName + '&nbsp;' +friends[i].lastName +
-            '<button id="button-edit" onclick="editContact(' + i + ')" >Edit</button>' + '</div>' +
-            '<div class="email" style="display: none">' + friends[i].email + '</div>' +
-            '<div class="number" style="display: none">' + friends[i].number + '</div>';
+            '<div class="name" onclick="showInformationAboutContact(' + i + ')">' + friends[i].firstName +
+            '&nbsp;' + friends[i].lastName + '</div>' +
+            '<div class="additional_info" style="display: none"><div class="email">' +
+            friends[i].email + '</div>' + '<div class="number">' +
+            friends[i].number + '</div></div>' +
+            '<button onclick="editContact(' + i + ')" >Edit</button>';// +
+            //'<div class="number" style="display: none">' + friends[i].number + '</div>';
 
         listContainer.appendChild(contact);
 
         //contact.addEventListener('click', editContact);
-    //document.getElementById('button-edit').innerHTML = ;
-
     }
 
 
@@ -60,40 +60,18 @@ function showListContacts() {
 showListContacts();
 
 
-function showInformationAboutContact() {
-    let form = document.getElementById('contact');
-    let emailInf = document.getElementsByClassName('email')[0] ;
-    let phoneNumber = document.getElementsByClassName('number')[0];
-    if (form.style.display === 'none'){
-    emailInf.style.display = 'block';
-    phoneNumber.style.display = 'block';
+function showInformationAboutContact(itemPosition) {
+    let additionalInfoBlock = document.getElementsByClassName('additional_info')[itemPosition];
+    if (additionalInfoBlock.style.display === 'none'){
+        additionalInfoBlock.style.display = 'block';
     } else {
-        emailInf.style.display = 'none';
-        phoneNumber.style.display = 'none';
+        additionalInfoBlock.style.display = 'none';
     }
 }
 
 
 function addContact(contact) {
-     let form = document.getElementById('contact');
-     let list = document.getElementById('contacts');
-     let search = document.getElementById('search');
-     let save = document.getElementById('button-save');
-     let add = document.getElementById('button-add');
-     if (form.style.display === 'none'){
-         form.style.display = 'block';
-         list.style.display = 'none';
-         search.style.display = 'none';
-         save.style.display = 'inline-block';
-         document.getElementById('button-add').innerHTML = 'cansel';
-     } else {
-         form.style.display = 'none';
-         list.style.display = 'block';
-         search.style.display = 'block';
-         save.style.display = 'none';
-         document.getElementById('button-add').innerHTML = 'add contact';
-
-     }
+     toggleListOrForm();
 
      if (contact) {
          document.getElementById('firstname').value = contact.firstName;
@@ -101,6 +79,28 @@ function addContact(contact) {
          document.getElementById('email').value = contact.email;
          document.getElementById('number').value = contact.number;
      }
+}
+
+function toggleListOrForm() {
+    let form = document.getElementById('contact');
+    let list = document.getElementById('contacts');
+    let search = document.getElementById('search');
+    let save = document.getElementById('button-save');
+    let add = document.getElementById('button-add');
+    if (form.style.display === 'none'){
+        form.style.display = 'block';
+        list.style.display = 'none';
+        search.style.display = 'none';
+        save.style.display = 'inline-block';
+        add.innerHTML = 'cansel';
+    } else {
+        form.style.display = 'none';
+        list.style.display = 'block';
+        search.style.display = 'block';
+        save.style.display = 'none';
+        add.innerHTML = 'add contact';
+
+    }
 }
 
 function addPhone() {
@@ -119,8 +119,10 @@ function saveContact(){
         number: userNumber,
         email: userEmail
     };
+
     addUserToLocalStorage(user);
     console.log(user);
+    toggleListOrForm();
     showListContacts();
 }
 

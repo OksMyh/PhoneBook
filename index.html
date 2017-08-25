@@ -12,12 +12,16 @@
 <form id="contact" style="display: none;">
     <label>First name:</label> <br>
     <input type="text" name="fname" placeholder="First Name" class="input-text" id="firstname"><br>
+
     <label>Last name:</label><br>
     <input type="text" name="lname" placeholder="Last Name" class="input-text" id="lastname"><br>
+
     <label>E-mail:</label><br>
     <input type="email" name="email" placeholder="E-mail@" class="input-text" id="email"><br>
+
     <label>Phone:</label><br>
     <input type="tel" name="phone" placeholder="Phone" class="input-text number" id="number">
+
     <input type="button" name="add-tell" value="+" id="button-phone" onclick="addPhone()">
     <br>
     <input type="tel" name="phone" placeholder="Phone" id="phone" style="display: none;" class="input-text number">
@@ -25,6 +29,7 @@
 </form>
 <button onclick="addContact()" class="contact__button" id="button-add">Add contact</button>
 <button onclick="saveContact()" class="contact__button"  id="button-save">Save contact</button>
+
 <div id="contacts"></div>
 
 <script src="index.js"></script>
