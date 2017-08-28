@@ -17,15 +17,7 @@ label {
     box-shadow: 10px 10px 5px grey;
     outline-color: #ec1313;
 }
-.contact__button {
-    height: 82px;
-    border-radius: 50%;
-    background-color: #ec1313;
-    color: #fff;
-    outline: none;
-    margin-left: 15px;
-    width: 80px;
-}
+
 #button-phone {
     color: #ec1313;
     height: 35px;
@@ -37,10 +29,58 @@ label {
     border-radius: 50%;
     box-shadow: 10px 10px 5px grey;
 }
+
+/*****buttons*****/
+
+.buttons {
+    display: flex;
+    align-content: center;
+}
+.contact__button {
+     height: 82px;
+     border-radius: 50%;
+     background-color: #ec1313;
+     color: #fff;
+     outline: none;
+     margin-left: 15px;
+     width: 80px;
+ }
+#button-save {
+    display: none;
+}
+.button-edit {
+    color: #fff;
+    outline: none;
+    background-color: #ec1313;
+    border: 1px solid #fff;
+    /* height: 26px; */
+    font-size: 16px;
+    text-align: center;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
+/**************/
 #contacts {
     font-size: 23px;
     padding-left: 30px;
 }
-#button-save {
-    display: none;
+
+/*******search**********/
+
+.box-search {
+    display: flex;
+    align-items: center;
+}
+#button-search {
+    background-color: red;
+    width: 50px;
+    height: 40px;
+    outline: none;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+.fa-search {
+    color: #fff;
+    font-size: 17px;
 }

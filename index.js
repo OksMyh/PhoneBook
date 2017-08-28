@@ -1,29 +1,29 @@
-// let friends = [
-//      {
-//         firstName: 'Ivan ',
-//         lastName: 'Gates ',
-//         number: '(093) 555-5555 ',
-//         email: 'Ivan@gmail.com '
-//     },
-//     {
-//         firstName: 'Andrew ',
-//         lastName: 'Sveichek ',
-//         number: '(093) 444-4444 ',
-//         email: 'Andrew@gmail.com '
-//     },
-//     {
-//         firstName: 'David ',
-//         lastName: 'Chouk ',
-//         number: '(093) 333-3333 ',
-//         email: 'David@gmail.com '
-//     }
-// ];
+let friends = [
+     {
+        firstName: 'Ivan ',
+        lastName: 'Gates ',
+        number: '(093) 555-5555 ',
+        email: 'Ivan@gmail.com '
+    },
+    {
+        firstName: 'Andrew ',
+        lastName: 'Sveichek ',
+        number: '(093) 444-4444 ',
+        email: 'Andrew@gmail.com '
+    },
+    {
+        firstName: 'David ',
+        lastName: 'Chouk ',
+        number: '(093) 333-3333 ',
+        email: 'David@gmail.com '
+    }
+];
 
 
-// localStorage.setItem('friendsList', JSON.stringify(friends));
-// let  retrievedObjectStr = localStorage.getItem('friendsList');
-// let obtainedFriendsObj = JSON.parse(retrievedObjectStr);
-// console.log(obtainedFriendsObj);
+localStorage.setItem('friendsList', JSON.stringify(friends));
+let  retrievedObjectStr = localStorage.getItem('friendsList');
+let obtainedFriendsObj = JSON.parse(retrievedObjectStr);
+console.log(obtainedFriendsObj);
 
 function editContact(friendPosition) {
     let friends = JSON.parse(localStorage.getItem('friendsList')) || [];
@@ -47,8 +47,7 @@ function showListContacts() {
             '<div class="additional_info" style="display: none"><div class="email">' +
             friends[i].email + '</div>' + '<div class="number">' +
             friends[i].number + '</div></div>' +
-            '<button onclick="editContact(' + i + ')" >Edit</button>';// +
-            //'<div class="number" style="display: none">' + friends[i].number + '</div>';
+            '<button class="button-edit" onclick="editContact(' + i + ')" >Edit</button>';
 
         listContainer.appendChild(contact);
 
@@ -171,4 +170,40 @@ function editAllOccuredUser(friend) {
     localStorage.setItem('friendsList', JSON.stringify(friends));
 }
 
+// var lastResFind=""; // последний удачный результат
+// var copy_page=""; // копия страницы в ихсодном виде
+ function TrimStr(s) {
+     s = s.replace( /^\s+/g, '');
+     return s.replace( /\s+$/g, '');
+ }
 
+
+function FindOnPage(inputId) {//ищет текст на странице, в параметр передается ID поля для ввода
+    var obj = window.document.getElementById(inputId);
+    var textToFind;
+
+    if (obj) {
+        textToFind = TrimStr(obj.value);//обрезаем пробелы
+    } else {
+        alert("Введенная фраза не найдена");
+        return;
+    }
+    if (textToFind == "") {
+        alert("Вы ничего не ввели");
+        return;
+    }
+
+    if(document.body.innerHTML.indexOf(textToFind)=="-1")
+        alert("Ничего не найдено, проверьте правильность ввода!");
+
+    if(copy_page.length>0)
+        document.body.innerHTML=copy_page;
+    else copy_page=document.body.innerHTML;
+
+
+    document.body.innerHTML = document.body.innerHTML.replace(eval("/name="+lastResFind+"/gi")," ");//стираем предыдущие якори для скрола
+    document.body.innerHTML = document.body.innerHTML.replace(eval("/"+textToFind+"/gi"),"<a name="+textToFind+" style='background:red'>"+textToFind+"</a>"); //Заменяем найденный текст ссылками с якорем;
+    lastResFind=textToFind; // сохраняем фразу для поиска, чтобы в дальнейшем по ней стереть все ссылки
+    window.location = '#'+textToFind;//перемещаем скрол к последнему найденному совпадению
+}
+// </script>

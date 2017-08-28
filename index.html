@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Phone Book</title>
+    <link rel="stylesheet" href="./fonts/css/font-awesome.min.css">
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
 <form id="search">
-    <input type="search" placeholder="Search" class="input-text">
+    <div class="box-search">
+        <input type="search" placeholder="Search" class="input-text" id="text-to-find">
+        <button id="button-search" onclick="FindOnPage('text-to-find')">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+        <!--<input type="button" ; return false;" value="Искать"/>-->
+    </div>
 </form>
 <form id="contact" style="display: none;">
     <input type="text" id="item_id" style="display: none;" value="some item id">
@@ -29,9 +36,10 @@
     <input type="tel" name="phone" placeholder="Phone" id="phone" style="display: none;" class="input-text number">
     <br>
 </form>
-<button onclick="addContact()" class="contact__button" id="button-add">Add contact</button>
-<button onclick="saveContact()" class="contact__button"  id="button-save">Save contact</button>
-
+<section class="buttons">
+    <button onclick="addContact()" class="contact__button" id="button-add">Add contact</button>
+    <button onclick="saveContact()" class="contact__button"  id="button-save">Save contact</button>
+</section>
 <div id="contacts"></div>
 
 <script src="index.js"></script>
