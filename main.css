@@ -16,6 +16,7 @@ label {
     border-radius: 7px;
     box-shadow: 10px 10px 5px grey;
     outline-color: #ec1313;
+    width: 80%;
 }
 
 #button-phone {
@@ -83,4 +84,11 @@ label {
 .fa-search {
     color: #fff;
     font-size: 17px;
+}
+
+
+/*****responsive*****/
+
+@media screen and (max-width: 800px)  {
+
 }
